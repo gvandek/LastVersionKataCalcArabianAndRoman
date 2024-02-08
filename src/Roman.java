@@ -1,13 +1,6 @@
 public enum Roman {
     I(1),
-    II(2),
-    III(3),
-    IV(4),
     V(5),
-    VI(6),
-    VII(7),
-    VIII(8),
-    IX(9),
     X(10),
     L(50),
     C(100);
@@ -22,12 +15,27 @@ public enum Roman {
         return this.i;
     }
 
+    public static String convertToRoman(int number) {
+
+        StringBuilder roman = new StringBuilder();
+        Roman[] numerals = Roman.values();
+
+        for (int i = numerals.length - 1; i >= 0; i--) {
+            while (number >= numerals[i].getI()) {
+                roman.append(numerals[i]);
+                number -= numerals[i].getI();
+            }
+        }
+
+        return roman.toString();
+    }
+
     public static int romanToArabic(String roman) {
         int end = roman.length() - 1;
         char[] a = roman.toCharArray();
         int result = toInt(a[end]);
 
-        for(int i = end - 1; i >= 0; --i) {
+        for (int i = end - 1; i >= 0; --i) {
             int arabian = toInt(a[i]);
             if (arabian < toInt(a[i + 1])) {
                 result -= arabian;
@@ -43,19 +51,15 @@ public enum Roman {
         return valueOf(String.valueOf(roman)).getI();
     }
 
-    public static boolean isRoman(String proverka) {
-        Roman[] var1 = values();
-        int var2 = var1.length;
-
-        for(int var3 = 0; var3 < var2; ++var3) {
-            Roman number = var1[var3];
-            if (number.name().equals(proverka)) {
-                return true;
+    public static boolean isRoman(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (Roman.valueOf(String.valueOf(input.charAt(i))) == null) {
+                return false;
             }
         }
-
-        return false;
+        return true;
     }
 }
+
 
 
