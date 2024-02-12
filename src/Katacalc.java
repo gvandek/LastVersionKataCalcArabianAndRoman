@@ -2,27 +2,27 @@ import java.util.Scanner;
 
  public class Katacalc {
      public static void main(String[] args) throws Exception {
-                  String[] splitoper = {"\\+", "-", "/", "\\*"};
+         String[] splitoper = {"\\+", "-", "/", "\\*"};
          Scanner scn = new Scanner(System.in);
          System.out.print("Введите выражение: ");
          String exp = scn.nextLine();
-
          boolean isRoman;
          int num1;
          int num2;
          String action = null;
          String[] numbers = exp.split("[+\\-*/]");
+         if (numbers.length < 2) throw new Exception("строка не является математической операцией");
+         if (numbers.length >= 3) throw new Exception("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
          if (numbers.length != 2) throw new Exception("Должно быть два числа");
          action = validate(exp);
-         //нужно сделать проверку на 2 римских числа или 2 арабских
-         if (Roman.isRoman(numbers[0]) && Roman.isRoman(numbers[1])) {
-             num1 = Roman.romanToArabic(numbers[0]);
-             num2 = Roman.romanToArabic(numbers[1]);
-             isRoman = true;
-         } else if (!Roman.isRoman(numbers[0]) && !Roman.isRoman(numbers[1])) {
+         if (!Roman.isRoman(numbers[0]) && !Roman.isRoman(numbers[1])) {
              num1 = Integer.parseInt(numbers[0]);
              num2 = Integer.parseInt(numbers[1]);
              isRoman = false;
+         }else if (Roman.isRoman1(numbers[0]) && Roman.isRoman1(numbers[1])) {
+             num1 = Roman.romanToArabic(numbers[0]);
+             num2 = Roman.romanToArabic(numbers[1]);
+             isRoman = true;
          } else {
              throw new Exception("Используются одновременно разные системы счисления");
          }
@@ -41,7 +41,6 @@ import java.util.Scanner;
                  System.out.println(resultArabian);
              }
          }
-
      private static String validate(String exp) throws Exception{
          String[] proverka = null;
          String action = null;
