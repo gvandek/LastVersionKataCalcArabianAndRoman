@@ -7,6 +7,7 @@ import java.util.Scanner;
          System.out.print("Введите выражение: ");
          String exp = scn.nextLine();
          boolean isRoman;
+
          int num1;
          int num2;
          String action = null;
@@ -15,14 +16,15 @@ import java.util.Scanner;
          if (numbers.length >= 3) throw new Exception("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
          if (numbers.length != 2) throw new Exception("Должно быть два числа");
          action = validate(exp);
-         if (!Roman.isRoman(numbers[0]) && !Roman.isRoman(numbers[1])) {
-             num1 = Integer.parseInt(numbers[0]);
-             num2 = Integer.parseInt(numbers[1]);
-             isRoman = false;
-         }else if (Roman.isRoman1(numbers[0]) && Roman.isRoman1(numbers[1])) {
+
+         if (Roman.isRoman(numbers[0]) && Roman.isRoman(numbers[1])) {
              num1 = Roman.romanToArabic(numbers[0]);
              num2 = Roman.romanToArabic(numbers[1]);
              isRoman = true;
+         }else if (!Roman.isRoman(numbers[0]) && !Roman.isRoman(numbers[1])) {
+             num1 = Integer.parseInt(numbers[0]);
+             num2 = Integer.parseInt(numbers[1]);
+             isRoman = false;
          } else {
              throw new Exception("Используются одновременно разные системы счисления");
          }
