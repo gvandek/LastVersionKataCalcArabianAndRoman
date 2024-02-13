@@ -2,7 +2,7 @@ import java.util.Scanner;
 
  public class Katacalc {
      public static void main(String[] args) throws Exception {
-         String[] splitoper = {"\\+", "-", "/", "\\*"};
+         String[] splitoper = {"\\+", "-", "/", "\\*"}; // лишнее вроде, не нашел где используется
          Scanner scn = new Scanner(System.in);
          System.out.print("Введите выражение: ");
          String exp = scn.nextLine();
@@ -44,8 +44,8 @@ import java.util.Scanner;
              }
          }
      private static String validate(String exp) throws Exception{
-         String[] proverka = null;
-         String action = null;
+         String[] proverka = null; // этот массив нигде в методе не используется
+         String action = null; // аналогично
           if (exp.contains("+"))
               return "+";
           else if (exp.contains("-"))
@@ -57,6 +57,7 @@ import java.util.Scanner;
           else
               throw new Exception("Введен неправильный знак дейтсвия ");
  }
+  //название метода не сокращай, пиши полностью calculate
      private static int calc(int num1, int num2, String action) {
           if (action.equals("+")) {
               return num1 + num2;
