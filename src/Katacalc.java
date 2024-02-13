@@ -28,7 +28,7 @@ import java.util.Scanner;
          } else {
              throw new Exception("Используются одновременно разные системы счисления");
          }
-         int resultArabian = calc(num1, num2, action);
+         int resultArabian = calc(num1, num2, action); // Arabian or Arabic выбери для себя слово одно
          if (num1 > 10 || num2 > 10) {
              throw new Exception("Числа должны быть от 1 до 10");
          }
